@@ -15,7 +15,7 @@ tags: [MOC, machine-learning]
 ## 当前进度
 
 - [x] [[ML/Linear Regression/00 Linear Regression MOC|线性回归]]：模型、MSE、梯度、正规方程、NumPy、sklearn、三特征可视化
-- [ ] 逻辑回归与分类
+- [x] [[ML/Logistic Regression/00 Logistic Regression MOC|逻辑回归与分类]]：Sigmoid、交叉熵、多项式映射、L2 正则化、决策边界
 - [ ] 正则化与偏差／方差
 - [ ] 神经网络
 - [ ] 聚类与降维

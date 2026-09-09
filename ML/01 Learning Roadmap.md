@@ -27,7 +27,7 @@ flowchart LR
 ## 当前阶段
 
 1. [[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]：先把“模型—损失—优化—实现”闭环走通。
-2. 逻辑回归：把同一套思路迁移到分类。
+2. [[ML/Logistic Regression/00 Logistic Regression MOC|Logistic Regression]]：把同一套思路迁移到分类，顺带落地正则化。
 3. 正则化、诊断与模型选择：从“能拟合”进入“能泛化”。
 4. 无监督学习：理解没有标签时如何定义目标。
 

@@ -21,6 +21,10 @@ flowchart TD
     LR --> MSE[MSE]
     LR --> GD[梯度下降]
     LR --> NE[正规方程]
+    LOG --> BCE[交叉熵]
+    LOG --> SIG[Sigmoid]
+    LOG --> L2REG[L2 正则化]
+    LOG --> DB[决策边界]
 ```
 
 ## 概念分区
@@ -30,7 +34,7 @@ flowchart TD
 训练数据包含输入 $X$ 和标签 $y$。常见任务：
 
 - **回归**：预测连续值，如房价；当前节点是 [[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]。
-- **分类**：预测离散类别，下一步通常学习逻辑回归。
+- **分类**：预测离散类别，当前节点是 [[ML/Logistic Regression/00 Logistic Regression MOC|Logistic Regression]]——线性打分加 Sigmoid 输出概率。
 
 ### 🧩 无监督学习
 
@@ -46,4 +50,4 @@ flowchart TD
 
 ## 接下来
 
-按 [[01 Learning Roadmap]] 逐步学习；当前完整主题：[[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]。
+按 [[01 Learning Roadmap]] 逐步学习；已完成的完整主题：[[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]、[[ML/Logistic Regression/00 Logistic Regression MOC|Logistic Regression]]。

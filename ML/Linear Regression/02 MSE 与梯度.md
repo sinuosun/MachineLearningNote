@@ -34,5 +34,7 @@ $$\frac{\partial L}{\partial b}=\frac2n\sum_{i=1}^n(\hat y_i-y_i)=2\operatorname
 
 若定义误差为 $y-\hat y$，公式整体会多一个负号；两种写法完全等价，只需前后一致。
 
+分类任务里 MSE 让位给交叉熵，梯度形式同样化简为 $a-y$：见 [[ML/Logistic Regression/02 交叉熵损失与梯度]]。
+
 转置的直觉与维度推导：[[03 为什么梯度里有 X 转置]]。
 
