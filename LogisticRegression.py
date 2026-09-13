@@ -1,146 +1,277 @@
-'''
-import numpy as np
+"""从零实现二分类逻辑回归，并与 scikit-learn 基线比较。
+
+本例使用两个月牙形类别，先标准化原始特征，再做多项式特征映射，
+最后以带 L2 正则化的批量梯度下降训练逻辑回归。
+
+依赖：numpy、matplotlib、scikit-learn
+"""
+
+from pathlib import Path
+
 import matplotlib.pyplot as plt
-
-#training set
-X = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
-y = np.array([0, 0, 0, 1, 1, 1]).reshape(-1,1) 
-
-
-w = np.zeros((X.shape[1],1))
-b = 0.0
-a = 0.01
-#define sigmoid function
-def sigmoid(z):
-    return 1/(1+np.exp(-z))
-
-#gradient descent
-for _ in range(10000):#modify the parameters to see the effect on the decision boundary（1000次时欠拟合）
-    z = X @ w + b
-    y_pred = sigmoid(z)#prediction
-    dz = y_pred - y#loss
-    dw = X.T @ dz / len(X)
-    db = np.mean(dz)
-
-    w -= a*dw
-    b -= a*db
-#if we need regularization,we just need to add the regularization term to the loss function.
-
-# Step 1: 确定范围 (Determine Bounds)
-x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
-y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
-
-# Step 2: 生成网格 (Generate Meshgrid)
-xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
-                     np.arange(y_min, y_max, 0.01))
-
-
-#以下绘图由ai生成
-# Step 3: 计算预测 (Calculate Predictions)
-# np.c_ 将展开的网格点组合成两列的特征矩阵 (Combines flattened points into a 2-column feature matrix)
-grid_X = np.c_[xx.ravel(), yy.ravel()]
-grid_z = grid_X @ w + b
-grid_predictions = sigmoid(grid_z)
-grid_predictions = grid_predictions.reshape(xx.shape)
-
-# Step 4: 绘制图表 (Plotting the Chart)
-plt.figure(figsize=(8, 6))
-
-# 使用 contourf 填充预测区域背景 (Fill prediction background regions)
-plt.contourf(xx, yy, grid_predictions, levels=[0, 0.5, 1], alpha=0.3, colors=['blue', 'red'])
-
-# 绘制决策边界线 (Draw the decision boundary line at exactly 0.5 probability)
-plt.contour(xx, yy, grid_predictions, levels=[0.5], colors='black', linewidths=2)
-
-# 绘制原始散点图 (Plot original scatter points)
-plt.scatter(X[y[:,0]==0][:, 0], X[y[:,0]==0][:, 1], color='blue', edgecolor='k', label='Class 0')
-plt.scatter(X[y[:,0]==1][:, 0], X[y[:,0]==1][:, 1], color='red', edgecolor='k', label='Class 1')
-
-plt.title("Logistic Regression Decision Boundary (逻辑回归决策边界)")
-plt.xlabel("Feature 1 (特征 1)")
-plt.ylabel("Feature 2 (特征 2)")
-plt.legend()
-plt.show()
-'''
-
-
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
-
-# 1. 生成规模更大且具备非线性边界的合成数据集 (200 个样本)
-X, y = make_moons(n_samples=400, noise=0.20)
-#这里可以加上random_state=42来保证每次生成的数据集相同
-y = y.reshape(-1, 1)
-
-# 2. 特征映射函数: 多项式基函数展开 (Polynomial Feature Mapping)
-# 将 [x1, x2] 映射为 [x1, x2, x1^2, x1*x2, x2^2, x1^3, ...]
-def map_feature(x1, x2, degree=4):#这个也可以调整！
-    out = []
-    for i in range(1, degree + 1):#i表示阶数
-        for j in range(i + 1):#j表示x2的指数
-            out.append((x1 ** (i - j)) * (x2 ** j))
-    return np.column_stack(out)
-
-# 构造高阶特征矩阵
-#========================调整阶数========================
-degree = 6  # 可调节阶数: 2 (二次), 3 (三次), 4 等
-X_poly = map_feature(X[:, 0], X[:, 1], degree=degree)
-
-# 3. 初始化参数与超参数
-w = np.zeros((X_poly.shape[1], 1))
-b = 0.0
-
-#=========================调参========================
-alpha = 0.1         # 学习率
-reg_lambda = 0.01   # L2 正则化系数 (lambda > 0 防止高阶项过拟合)
-epochs = 1000
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, log_loss
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 
 
-m = len(X)
+RANDOM_STATE = 42
+DEGREE = 6
+LEARNING_RATE = 0.1
+REG_LAMBDA = 0.05
+MAX_EPOCHS = 30_000
 
-def sigmoid(z):
-    return 1 / (1 + np.exp(-np.clip(z, -250, 250)))
 
-# 4. 批量梯度下降 (含 L2 正则化梯度)
-for _ in range(epochs):
-    z = X_poly @ w + b
-    y_pred = sigmoid(z)
-    dz = y_pred - y
-    
-    # 偏导数: dw 加入 L2 惩罚项 (注意: bias 项 b 通常不参与正则化)
-    #岭回归Ridge Regression
-    dw = (X_poly.T @ dz) / m + (reg_lambda / m) * w
-    db = np.mean(dz)
+def sigmoid(z: np.ndarray) -> np.ndarray:
+    """数值稳定的 Sigmoid。"""
+    z = np.clip(z, -500.0, 500.0)
+    return 1.0 / (1.0 + np.exp(-z))
 
-    w -= alpha * dw
-    b -= alpha * db
 
-# 5. 绘制决策边界
-x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
-y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
-xx, yy = np.meshgrid(np.linspace(x_min, x_max, 300),
-                     np.linspace(y_min, y_max, 300))
+def polynomial_features(x: np.ndarray, degree: int) -> np.ndarray:
+    """把二维输入映射为 1..degree 阶的全部多项式项，不加入常数列。"""
+    x1, x2 = x[:, 0], x[:, 1]
+    terms = []
+    for total_degree in range(1, degree + 1):
+        for x2_power in range(total_degree + 1):
+            x1_power = total_degree - x2_power
+            terms.append((x1**x1_power) * (x2**x2_power))
+    return np.column_stack(terms)
 
-# 对网格点同样进行多项式映射
-grid_poly = map_feature(xx.ravel(), yy.ravel(), degree=degree)
-grid_z = grid_poly @ w + b
-grid_predictions = sigmoid(grid_z).reshape(xx.shape)
 
-plt.figure(figsize=(8, 6))
+def binary_cross_entropy_from_logits(
+    logits: np.ndarray,
+    y_true: np.ndarray,
+    weights: np.ndarray,
+    reg_lambda: float,
+) -> float:
+    """稳定计算 BCE + lambda/(2m)||w||²，避免直接 log(0)。"""
+    m = len(y_true)
+    data_loss = np.mean(np.logaddexp(0.0, logits) - y_true * logits)
+    regularization = reg_lambda * np.sum(weights**2) / (2.0 * m)
+    return float(data_loss + regularization)
 
-# 填充决策区域
-plt.contourf(xx, yy, grid_predictions, levels=[0, 0.5, 1], alpha=0.25, colors=['blue', 'red'])
-# 绘制 P(y=1|x) = 0.5 的非线性决策边界
-plt.contour(xx, yy, grid_predictions, levels=[0.5], colors='black', linewidths=2)
 
-# 绘制两类样本散点
-plt.scatter(X[y[:, 0] == 0][:, 0], X[y[:, 0] == 0][:, 1], color='blue', edgecolor='k', label='Class 0', alpha=0.8)
-plt.scatter(X[y[:, 0] == 1][:, 0], X[y[:, 0] == 1][:, 1], color='red', edgecolor='k', label='Class 1', alpha=0.8)
+def fit_logistic_regression(
+    x_train: np.ndarray,
+    y_train: np.ndarray,
+    learning_rate: float = LEARNING_RATE,
+    reg_lambda: float = REG_LAMBDA,
+    max_epochs: int = MAX_EPOCHS,
+    tolerance: float = 1e-9,
+    patience: int = 200,
+) -> tuple[np.ndarray, float, list[float]]:
+    """使用全批量梯度下降训练带 L2 正则化的逻辑回归。"""
+    m, n_features = x_train.shape
+    weights = np.zeros(n_features)
+    bias = 0.0
+    history: list[float] = []
+    best_loss = np.inf
+    unchanged_epochs = 0
 
-plt.title(f"Polynomial Logistic Regression (Degree = {degree}, $\lambda$ = {reg_lambda})")
-plt.xlabel("Feature 1 ($x_1$)")
-plt.ylabel("Feature 2 ($x_2$)")
-plt.legend()
-plt.tight_layout()
-plt.show()
+    for epoch in range(max_epochs):
+        logits = x_train @ weights + bias
+        probabilities = sigmoid(logits)
+        error = probabilities - y_train
+
+        # X.T 把 m 个样本的误差信号汇总成 n_features 个参数梯度。
+        grad_w = (x_train.T @ error) / m + (reg_lambda / m) * weights
+        grad_b = float(np.mean(error))  # 截距通常不正则化
+
+        weights -= learning_rate * grad_w
+        bias -= learning_rate * grad_b
+
+        if epoch % 10 == 0:
+            updated_logits = x_train @ weights + bias
+            loss = binary_cross_entropy_from_logits(
+                updated_logits, y_train, weights, reg_lambda
+            )
+            history.append(loss)
+            if best_loss - loss > tolerance:
+                best_loss = loss
+                unchanged_epochs = 0
+            else:
+                unchanged_epochs += 1
+                if unchanged_epochs >= patience:
+                    break
+
+    return weights, bias, history
+
+
+def predict_proba(x: np.ndarray, weights: np.ndarray, bias: float) -> np.ndarray:
+    return sigmoid(x @ weights + bias)
+
+
+def predict(
+    x: np.ndarray, weights: np.ndarray, bias: float, threshold: float = 0.5
+) -> np.ndarray:
+    return (predict_proba(x, weights, bias) >= threshold).astype(int)
+
+
+def prepare_features(
+    x_train_raw: np.ndarray, x_test_raw: np.ndarray, degree: int
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """只用训练集统计量标准化，避免数据泄漏。"""
+    mean = x_train_raw.mean(axis=0)
+    scale = x_train_raw.std(axis=0)
+    scale = np.where(scale == 0, 1.0, scale)
+    x_train_scaled = (x_train_raw - mean) / scale
+    x_test_scaled = (x_test_raw - mean) / scale
+    return (
+        polynomial_features(x_train_scaled, degree),
+        polynomial_features(x_test_scaled, degree),
+        mean,
+        scale,
+    )
+
+
+def create_visualizations(
+    x_raw: np.ndarray,
+    y: np.ndarray,
+    train_indices: np.ndarray,
+    test_indices: np.ndarray,
+    mean: np.ndarray,
+    scale: np.ndarray,
+    weights: np.ndarray,
+    bias: float,
+    history: list[float],
+    output_dir: Path,
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    x_min, x_max = x_raw[:, 0].min() - 0.5, x_raw[:, 0].max() + 0.5
+    y_min, y_max = x_raw[:, 1].min() - 0.5, x_raw[:, 1].max() + 0.5
+    xx, yy = np.meshgrid(
+        np.linspace(x_min, x_max, 350), np.linspace(y_min, y_max, 350)
+    )
+    grid_raw = np.column_stack([xx.ravel(), yy.ravel()])
+    grid_scaled = (grid_raw - mean) / scale
+    grid_poly = polynomial_features(grid_scaled, DEGREE)
+    grid_probability = predict_proba(grid_poly, weights, bias).reshape(xx.shape)
+
+    fig, ax = plt.subplots(figsize=(9, 6.5), constrained_layout=True)
+    field = ax.contourf(
+        xx, yy, grid_probability, levels=np.linspace(0, 1, 21), cmap="RdBu_r", alpha=0.72
+    )
+    ax.contour(xx, yy, grid_probability, levels=[0.5], colors="#111827", linewidths=2.2)
+    for label, color in [(0, "#2563eb"), (1, "#dc2626")]:
+        train_mask = y[train_indices] == label
+        test_mask = y[test_indices] == label
+        ax.scatter(
+            x_raw[train_indices][train_mask, 0],
+            x_raw[train_indices][train_mask, 1],
+            c=color,
+            s=34,
+            edgecolors="white",
+            linewidths=0.5,
+            label=f"Class {label} · train",
+        )
+        ax.scatter(
+            x_raw[test_indices][test_mask, 0],
+            x_raw[test_indices][test_mask, 1],
+            c=color,
+            s=48,
+            marker="x",
+            linewidths=1.4,
+            label=f"Class {label} · test",
+        )
+    fig.colorbar(field, ax=ax, label="P(y = 1 | x)")
+    ax.set(
+        title=f"Polynomial logistic regression · degree={DEGREE}, λ={REG_LAMBDA}",
+        xlabel="Feature 1",
+        ylabel="Feature 2",
+    )
+    ax.legend(ncol=2, fontsize=9)
+    fig.savefig(output_dir / "logistic_regression_decision_boundary.png", dpi=180)
+    plt.close(fig)
+
+    test_scaled = (x_raw[test_indices] - mean) / scale
+    test_poly = polynomial_features(test_scaled, DEGREE)
+    test_probability = predict_proba(test_poly, weights, bias)
+    test_prediction = (test_probability >= 0.5).astype(int)
+    matrix = confusion_matrix(y[test_indices], test_prediction)
+
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4.3), constrained_layout=True)
+    axes[0].plot(np.arange(len(history)) * 10, history, color="#2563eb")
+    axes[0].set(xlabel="Epoch", ylabel="Regularized BCE", title="Training loss")
+
+    image = axes[1].imshow(matrix, cmap="Blues")
+    for row in range(2):
+        for col in range(2):
+            axes[1].text(col, row, matrix[row, col], ha="center", va="center", fontsize=14)
+    axes[1].set(
+        xticks=[0, 1], yticks=[0, 1], xlabel="Predicted", ylabel="True", title="Test confusion matrix"
+    )
+    fig.colorbar(image, ax=axes[1], fraction=0.046)
+
+    axes[2].hist(test_probability[y[test_indices] == 0], bins=12, alpha=0.7, label="True class 0")
+    axes[2].hist(test_probability[y[test_indices] == 1], bins=12, alpha=0.7, label="True class 1")
+    axes[2].axvline(0.5, color="#111827", linestyle="--", label="threshold = 0.5")
+    axes[2].set(xlabel="Predicted P(y=1)", ylabel="Count", title="Probability separation")
+    axes[2].legend(fontsize=8)
+    fig.savefig(output_dir / "logistic_regression_diagnostics.png", dpi=180)
+    plt.close(fig)
+
+
+def main() -> None:
+    x_raw, y = make_moons(n_samples=400, noise=0.20, random_state=RANDOM_STATE)
+    all_indices = np.arange(len(x_raw))
+    train_indices, test_indices = train_test_split(
+        all_indices, test_size=0.25, random_state=RANDOM_STATE, stratify=y
+    )
+    x_train, x_test, mean, scale = prepare_features(
+        x_raw[train_indices], x_raw[test_indices], DEGREE
+    )
+    y_train, y_test = y[train_indices], y[test_indices]
+
+    weights, bias, history = fit_logistic_regression(x_train, y_train)
+    test_probability = predict_proba(x_test, weights, bias)
+    test_prediction = predict(x_test, weights, bias)
+
+    # sklearn 的 C 与正则强度反向变化；1/lambda 是直观对照，不保证因目标缩放约定而参数逐项相等。
+    sklearn_model = make_pipeline(
+        StandardScaler(),
+        PolynomialFeatures(degree=DEGREE, include_bias=False),
+        LogisticRegression(C=1.0 / REG_LAMBDA, max_iter=10_000, solver="lbfgs"),
+    )
+    sklearn_model.fit(x_raw[train_indices], y_train)
+    sklearn_probability = sklearn_model.predict_proba(x_raw[test_indices])[:, 1]
+    sklearn_prediction = sklearn_model.predict(x_raw[test_indices])
+
+    print(f"mapped features : {x_train.shape[1]}")
+    print(f"epochs used     : {(len(history) - 1) * 10}")
+    print(
+        f"NumPy test      : accuracy={accuracy_score(y_test, test_prediction):.3f}, "
+        f"log_loss={log_loss(y_test, test_probability):.3f}"
+    )
+    print(
+        f"sklearn test    : accuracy={accuracy_score(y_test, sklearn_prediction):.3f}, "
+        f"log_loss={log_loss(y_test, sklearn_probability):.3f}"
+    )
+
+    script_dir = Path(__file__).resolve().parent
+    output_dir = (
+        script_dir.parent / "Assets"
+        if script_dir.name == "Code"
+        else script_dir / "LogisticRegression_assets"
+    )
+    create_visualizations(
+        x_raw,
+        y,
+        train_indices,
+        test_indices,
+        mean,
+        scale,
+        weights,
+        bias,
+        history,
+        output_dir,
+    )
+    print(f"figures         : {output_dir}")
+
+
+if __name__ == "__main__":
+    main()
