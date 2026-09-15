@@ -40,6 +40,8 @@ flowchart LR
 
 运行整理版：[[Code/neural_network.py]]。你的最初脚本也原样保留为 [[Code/NeuralNetwork_original.py|NeuralNetwork_original.py]]，便于对照：整理版显式指定优化器和输入维度、固定随机种子、使用相对于脚本的路径，并输出测试指标。
 
+在 Google Colab 复现：[[Code/neural_network_colab.ipynb|Colab 笔记本]]；本机与云端解释器的区别见 [[ML/02 Python 与 Colab 环境]]。
+
 > [!example] 一次本地运行（随机种子 42）
 > 训练集：BCE 约 0.055、准确率 98.7%；测试集：BCE 约 0.116、准确率 100%（20/20）。这是对这 20 个样本的观测，不是对未来数据准确率的保证；不同 TensorFlow 环境的数值也可能略有差异。
 

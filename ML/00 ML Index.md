@@ -50,3 +50,5 @@ flowchart TD
 智能体通过状态、动作和奖励学习策略。其反馈不是逐样本标签，作为后续分支。
 
 继续：[[01 Learning Roadmap]]。
+
+运行代码前先检查 [[02 Python 与 Colab 环境|Python / Colab 环境]]，避免把包安装到另一个解释器。

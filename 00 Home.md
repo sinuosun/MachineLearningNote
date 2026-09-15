@@ -11,6 +11,7 @@ tags: [MOC, machine-learning]
 
 - [[ML/00 ML Index|🤖 Machine Learning]]
 - [[ML/01 Learning Roadmap|🧭 学习路线：从监督到无监督]]
+- [[ML/02 Python 与 Colab 环境|🛠️ Python、VS Code 与 Colab 环境]]
 
 ## 当前进度
 
