@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.obsidian": true,
+    "**/.vscode": true,
+    "**/.venv": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true
+  },
+  "search.exclude": {
+    "**/.obsidian": true,
+    "**/.venv": true,
+    "**/__pycache__": true
+  }
+}

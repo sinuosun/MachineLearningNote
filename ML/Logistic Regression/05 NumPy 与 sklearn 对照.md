@@ -32,6 +32,6 @@ model.fit(X_train, y_train)
 
 完整实现：[[Code/logistic_regression.py]]。
 
-同一份代码保存在 VS Code：[LogisticRegression.py](file:///Users/snow/%E9%A1%B9%E7%9B%AE/ML/LogisticRegression.py)。当前版本保留了你设置的六阶多项式思路，并补上稳定损失、固定随机种子、划分、标准化、早停、sklearn 基线和诊断图。
+VS Code 请直接打开本 Obsidian 仓库中的 [[Code/logistic_regression.py|配套代码]]。当前版本保留了你设置的六阶多项式思路，并补上稳定损失、固定随机种子、划分、标准化、早停、sklearn 基线和诊断图。
 
 下一步：[[06 评估指标与模型诊断]]。

@@ -19,6 +19,8 @@ flowchart TD
     LR --> MSE[MSE]
     LOG --> BCE[二元交叉熵]
     LOG --> TH[阈值与分类指标]
+    CLS --> NN[神经网络入门]
+    NN --> SPLIT[训练集与测试集]
     LR --> GD[梯度下降]
     LOG --> GD
     SL --> GEN[泛化：训练/验证/测试]
@@ -32,6 +34,7 @@ flowchart TD
 
 - **回归**：预测连续值；已完成 [[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]。
 - **分类**：预测类别或类别概率；已完成 [[ML/Logistic Regression/00 Logistic Regression MOC|Logistic Regression]]。
+- **神经网络实验**：从逻辑回归的一个神经元扩展到隐藏层，见 [[ML/Neural Network/00 Neural Network MOC|Neural Network]]。
 - 两者都需要独立数据评估泛化，不能只看训练损失。
 
 ## 🧩 无监督学习

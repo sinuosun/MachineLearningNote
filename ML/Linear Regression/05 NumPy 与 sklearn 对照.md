@@ -32,7 +32,7 @@ $$w=\left[\frac73,\frac73,1\right],\qquad b\approx0$$
 
 完整、可运行且带诊断图的实现：[[Code/linear_regression_numpy.py]]。
 
-同一份整理后代码也保存在 VS Code 项目中：[打开 `/Users/snow/项目/ML/LinearRegression.py`](file:///Users/snow/%E9%A1%B9%E7%9B%AE/ML/LinearRegression.py)。原先无扩展名的 `LinearRegression` 文件保留不动，方便回看最初版本。
+VS Code 请直接打开本 Obsidian 仓库。原始练习另存为 [[ML/Linear Regression/Code/Experiments/LinearRegression_original.py|最初版本]]，不会再依赖旧副本的绝对路径。
 
 > [!note] 工程提示
 > sklearn 负责可靠基线，NumPy 手写用于理解。真实项目还需训练／验证划分、特征预处理、数据泄漏检查和泛化评估；训练集 MSE 为零不代表泛化完美。
