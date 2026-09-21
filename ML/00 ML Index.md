@@ -32,9 +32,9 @@ flowchart TD
 
 训练数据包含输入 $X$ 和标签 $y$：
 
-- **回归**：预测连续值；已完成 [[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]。
-- **分类**：预测类别或类别概率；已完成 [[ML/Logistic Regression/00 Logistic Regression MOC|Logistic Regression]]。
-- **神经网络实验**：从逻辑回归的一个神经元扩展到隐藏层，见 [[ML/Neural Network/00 Neural Network MOC|Neural Network]]。
+- **回归**：预测连续值；已完成 [[ML/Linear Regression/Linear Regression MOC|Linear Regression]]。
+- **分类**：预测类别或类别概率；已完成 [[ML/Logistic Regression/Logistic Regression MOC|Logistic Regression]]。
+- **神经网络实验**：从逻辑回归的一个神经元扩展到隐藏层，见 [[ML/Neural Network/Neural Network MOC|Neural Network]]。
 - 两者都需要独立数据评估泛化，不能只看训练损失。
 
 ## 🧩 无监督学习
@@ -51,4 +51,4 @@ flowchart TD
 
 继续：[[01 Learning Roadmap]]。
 
-运行代码前先检查 [[02 Python 与 Colab 环境|Python / Colab 环境]]，避免把包安装到另一个解释器。
+运行代码前先检查 [[README|Python / Colab 环境]]，避免把包安装到另一个解释器。

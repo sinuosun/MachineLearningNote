@@ -11,13 +11,12 @@ tags: [MOC, machine-learning]
 
 - [[ML/00 ML Index|🤖 Machine Learning]]
 - [[ML/01 Learning Roadmap|🧭 学习路线：从监督到无监督]]
-- [[ML/02 Python 与 Colab 环境|🛠️ Python、VS Code 与 Colab 环境]]
+- [[README|🛠️ Python、VS Code 与 Colab 环境]]
 
 ## 当前进度
 
-- [x] [[ML/Linear Regression/00 Linear Regression MOC|线性回归]]：MSE、梯度、正规方程、NumPy/sklearn、三特征可视化
-- [x] [[ML/Logistic Regression/00 Logistic Regression MOC|逻辑回归与分类]]：Sigmoid、BCE、多项式特征、L2、阈值与测试集诊断
-- [ ] [[ML/Neural Network/00 Neural Network MOC|神经网络入门]]：已有训练/测试集和可运行实验，继续补反向传播
+- [x] [[ML/Linear Regression/Linear Regression MOC|线性回归]]：MSE、梯度、正规方程、NumPy/sklearn、三特征可视化
+- [x] [[ML/Logistic Regression/Logistic Regression MOC|逻辑回归与分类]]：Sigmoid、BCE、多项式特征、L2、阈值与测试集诊断
+- [ ] [[ML/Neural Network/Neural Network MOC|神经网络入门]]：已有训练/测试集和可运行实验，继续补反向传播
 - [ ] 模型评估、偏差与方差
 - [ ] 决策树与集成学习
-- [ ] 聚类与降维

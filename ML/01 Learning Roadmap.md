@@ -25,9 +25,9 @@ flowchart LR
 
 ## 当前阶段
 
-1. [[ML/Linear Regression/00 Linear Regression MOC|Linear Regression]]：已完成回归的模型—损失—优化闭环。
-2. [[ML/Logistic Regression/00 Logistic Regression MOC|Logistic Regression]]：已完成概率分类、BCE、正则化、阈值与基础诊断。
-3. [[ML/Neural Network/00 Neural Network MOC|神经网络入门实验]]：已有两个特征的二分类数据、训练/测试集与 Keras 配套代码；反向传播的完整推导仍是下一步。
+1. [[ML/Linear Regression/Linear Regression MOC|Linear Regression]]：已完成回归的模型—损失—优化闭环。
+2. [[ML/Logistic Regression/Logistic Regression MOC|Logistic Regression]]：已完成概率分类、BCE、正则化、阈值与基础诊断。
+3. [[ML/Neural Network/Neural Network MOC|神经网络入门实验]]：已有两个特征的二分类数据、训练/测试集与 Keras 配套代码；反向传播的完整推导仍是下一步。
 4. 随后系统整理模型评估、偏差/方差与学习曲线，再进入树模型和无监督学习。
 
 > [!tip] 每个主题的复现模板

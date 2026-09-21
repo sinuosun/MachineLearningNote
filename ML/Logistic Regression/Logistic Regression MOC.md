@@ -5,7 +5,7 @@ aliases: [Logistic Regression, 逻辑回归]
 
 # 🧭 逻辑回归
 
-逻辑回归是[[ML/00 ML Index|监督学习]]中的**分类**算法：先用 $z=Xw+b$ 计算线性分数，再经 Sigmoid 得到类别 1 的概率。它与[[ML/Linear Regression/00 Linear Regression MOC|线性回归]]共享“模型 → 损失 → 梯度 → 优化 → 诊断”的主干。
+逻辑回归是[[ML/00 ML Index|监督学习]]中的**分类**算法：先用 $z=Xw+b$ 计算线性分数，再经 Sigmoid 得到类别 1 的概率。它与[[ML/Linear Regression/Linear Regression MOC|线性回归]]共享“模型 → 损失 → 梯度 → 优化 → 诊断”的主干。
 
 ```mermaid
 flowchart TD
@@ -23,12 +23,12 @@ flowchart TD
 
 ## 阅读顺序
 
-1. [[01 从回归到分类：Sigmoid、概率与阈值]]
-2. [[02 二元交叉熵与梯度推导]]
-3. [[03 多项式特征与非线性决策边界]]
-4. [[04 L2 正则化、容量与过拟合]]
-5. [[05 NumPy 与 sklearn 对照]]
-6. [[06 评估指标与模型诊断]]
+1. [[从回归到分类：Sigmoid、概率与阈值]]
+2. [[二元交叉熵与梯度推导]]
+3. [[多项式特征与非线性决策边界]]
+4. [[L2 正则化、容量与过拟合]]
+5. [[NumPy 与 sklearn 对照]]
+6. [[评估指标与模型诊断]]
 7. [[Code/logistic_regression.py|可运行代码]]
 
 ## 一页速记

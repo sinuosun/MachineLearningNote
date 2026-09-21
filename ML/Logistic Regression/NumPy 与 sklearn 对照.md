@@ -34,4 +34,4 @@ model.fit(X_train, y_train)
 
 VS Code 请直接打开本 Obsidian 仓库中的 [[Code/logistic_regression.py|配套代码]]。当前版本保留了你设置的六阶多项式思路，并补上稳定损失、固定随机种子、划分、标准化、早停、sklearn 基线和诊断图。
 
-下一步：[[06 评估指标与模型诊断]]。
+下一步：[[评估指标与模型诊断]]。

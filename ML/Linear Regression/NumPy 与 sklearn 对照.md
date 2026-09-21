@@ -37,4 +37,4 @@ VS Code 请直接打开本 Obsidian 仓库。原始练习另存为 [[ML/Linear R
 > [!note] 工程提示
 > sklearn 负责可靠基线，NumPy 手写用于理解。真实项目还需训练／验证划分、特征预处理、数据泄漏检查和泛化评估；训练集 MSE 为零不代表泛化完美。
 
-下一步：同一套对照思路用在分类上，见 [[ML/Logistic Regression/05 NumPy 与 sklearn 对照]]。
+下一步：同一套对照思路用在分类上，见 [[ML/Logistic Regression/NumPy 与 sklearn 对照]]。

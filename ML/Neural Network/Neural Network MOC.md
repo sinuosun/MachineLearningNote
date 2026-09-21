@@ -9,7 +9,7 @@ tags: [MOC, supervised-learning, neural-network, classification]
 
 ## 🧠 为什么在逻辑回归之后学它
 
-[[ML/Logistic Regression/00 Logistic Regression MOC|逻辑回归]]可看成单个神经元：$a=\sigma(w^Tx+b)$。把多个神经元并成一层，再堆叠隐藏层，就是前馈网络：
+[[ML/Logistic Regression/Logistic Regression MOC|逻辑回归]]可看成单个神经元：$a=\sigma(w^Tx+b)$。把多个神经元并成一层，再堆叠隐藏层，就是前馈网络：
 
 $$a^{[0]}=x,\quad z^{[l]}=W^{[l]}a^{[l-1]}+b^{[l]},\quad a^{[l]}=g^{[l]}(z^{[l]})$$
 
@@ -27,20 +27,20 @@ flowchart LR
 
 ## 🧪 你的训练集与测试集
 
-原始数据已原样保留：[[Data/trainDL_v1.txt|训练集]]有 158 行，[[Data/testDL_v1.txt|测试集]]有 20 行；每行是 `x1 x2 label`，标签为 0 或 1。二维特征可以直接画决策边界，与三特征线性回归的 [[ML/Linear Regression/06 三特征可视化|4D 展示难题]]不同。
+原始数据已原样保留：[[Data/trainDL_v1.txt|训练集]]有 158 行，[[Data/testDL_v1.txt|测试集]]有 20 行；每行是 `x1 x2 label`，标签为 0 或 1。二维特征可以直接画决策边界，与三特征线性回归的 [[ML/Linear Regression/三特征可视化|4D 展示难题]]不同。
 
 训练集用于拟合参数，测试集只在训练结束后评估泛化。调网络结构、训练轮数或阈值时若反复依据测试结果选择，会把测试集变成“隐形验证集”；后续实验应再留验证集或使用交叉验证。两组数据由你提供，本笔记不假定它们来自随机划分或独立采样。
 
 ## ⚙️ 模型—损失—优化—评估
 
 - 模型：两层隐藏层（`tanh`）加 Sigmoid 输出。隐藏层的非线性对应“特征变换”；Sigmoid 输出对应概率。
-- 损失：[[ML/Logistic Regression/02 二元交叉熵与梯度推导|二元交叉熵]]衡量概率与 0/1 标签的差异；不是仅看准确率。
-- 优化：显式使用 Adam；Keras 自动用反向传播求梯度并更新权重。它与 [[ML/Linear Regression/04 梯度下降与正规方程|线性回归的梯度下降]]共享“沿梯度降低目标”的思想，但不是正规方程。
+- 损失：[[ML/Logistic Regression/二元交叉熵与梯度推导|二元交叉熵]]衡量概率与 0/1 标签的差异；不是仅看准确率。
+- 优化：显式使用 Adam；Keras 自动用反向传播求梯度并更新权重。它与 [[ML/Linear Regression/梯度下降与正规方程|线性回归的梯度下降]]共享“沿梯度降低目标”的思想，但不是正规方程。
 - 评估：分别报告训练和测试的 BCE、准确率，并列出测试集混淆矩阵。测试集 20 行较小，单次准确率波动可能明显，不能由一次结果断言模型已泛化。
 
 运行整理版：[[Code/neural_network.py]]。你的最初脚本也原样保留为 [[Code/NeuralNetwork_original.py|NeuralNetwork_original.py]]，便于对照：整理版显式指定优化器和输入维度、固定随机种子、使用相对于脚本的路径，并输出测试指标。
 
-在 Google Colab 复现：[[Code/neural_network_colab.ipynb|Colab 笔记本]]；本机与云端解释器的区别见 [[ML/02 Python 与 Colab 环境]]。
+在 Google Colab 复现：[[Code/neural_network_colab.ipynb|Colab 笔记本]]；本机与云端解释器的区别见 [[README]]。
 
 > [!example] 一次本地运行（随机种子 42）
 > 训练集：BCE 约 0.055、准确率 98.7%；测试集：BCE 约 0.116、准确率 100%（20/20）。这是对这 20 个样本的观测，不是对未来数据准确率的保证；不同 TensorFlow 环境的数值也可能略有差异。
