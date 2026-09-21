@@ -5,7 +5,7 @@ aliases: [Logistic Regression, 逻辑回归]
 
 # 🧭 逻辑回归
 
-逻辑回归是[[ML/00 ML Index|监督学习]]中的**分类**算法：先用 $z=Xw+b$ 计算线性分数，再经 Sigmoid 得到类别 1 的概率。它与[[ML/Linear Regression/Linear Regression MOC|线性回归]]共享“模型 → 损失 → 梯度 → 优化 → 诊断”的主干。
+逻辑回归是[[MachineLearning/ML Index|监督学习]]中的**分类**算法：先用 $z=Xw+b$ 计算线性分数，再经 Sigmoid 得到类别 1 的概率。它与[[MachineLearning/Linear Regression/Linear Regression MOC|线性回归]]共享“模型 → 损失 → 梯度 → 优化 → 诊断”的主干。
 
 ```mermaid
 flowchart TD

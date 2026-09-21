@@ -5,11 +5,11 @@
 ## 从这里开始
 
 - [学习库首页](00%20Home.md)
-- [机器学习概念地图](ML/00%20ML%20Index.md)
-- [学习路线：从监督到无监督](ML/01%20Learning%20Roadmap.md)
-- [线性回归主题](ML/Linear%20Regression/Linear%20Regression%20MOC.md)
-- [逻辑回归主题](ML/Logistic%20Regression/Logistic%20Regression%20MOC.md)
-- [神经网络入门](ML/Neural%20Network/Neural%20Network%20MOC.md)
+- [机器学习概念地图](MachineLearning/ML%20Index.md)
+- [学习路线：从监督到无监督](MachineLearning/Learning%20Roadmap.md)
+- [线性回归主题](MachineLearning/Linear%20Regression/Linear%20Regression%20MOC.md)
+- [逻辑回归主题](MachineLearning/Logistic%20Regression/Logistic%20Regression%20MOC.md)
+- [神经网络入门](MachineLearning/Neural%20Network/Neural%20Network%20MOC.md)
 
 ## 当前完成内容
 
@@ -27,7 +27,7 @@
 conda create --name MachineLearning python=3.11
 conda activate MachineLearning
 python -m pip install -r requirements.txt
-python "ML/Neural Network/Code/neural_network.py"
+python "MachineLearning/Neural Network/Code/neural_network.py"
 ```
 
 在 VS Code 中选择 `MachineLearning` conda 环境作为 Python 解释器，并确保安装依赖和运行脚本时都处于该环境。conda 环境由 Anaconda 管理，不需要在仓库中创建 `.venv`；依赖清单、源代码、数据和图片会提交。
@@ -38,8 +38,8 @@ python "ML/Neural Network/Code/neural_network.py"
 
 ```bash
 conda activate MachineLearning
-python "ML/Neural Network/Code/neural_network.py"
-python "ML/Logistic Regression/Code/logistic_regression.py"
+python "MachineLearning/Neural Network/Code/neural_network.py"
+python "MachineLearning/Logistic Regression/Code/logistic_regression.py"
 ```
 
 验证当前命令使用的解释器：
@@ -48,6 +48,6 @@ python "ML/Logistic Regression/Code/logistic_regression.py"
 python -c "import sys; print(sys.executable)"
 ```
 
-输出应指向 Anaconda 的 `envs/MachineLearning` 目录。Google Colab 不读取本机 conda 环境，可在 Colab 打开[神经网络 Colab 笔记本](ML/Neural%20Network/Code/neural_network_colab.ipynb)；它会从公开 GitHub 仓库拉取代码与数据，再在云端运行。
+输出应指向 Anaconda 的 `envs/MachineLearning` 目录。Google Colab 不读取本机 conda 环境，可在 Colab 打开[神经网络 Colab 笔记本](MachineLearning/Neural%20Network/Code/neural_network_colab.ipynb)；它会从公开 GitHub 仓库拉取代码与数据，再在云端运行。
 
 Python 缓存和 VS Code 临时工作区不纳入仓库。使用 VS Code 时只打开此仓库根目录，不再同时打开旧的副本。

@@ -5,7 +5,7 @@ aliases: [Linear Regression, 线性回归]
 
 # 📈 线性回归
 
-线性回归是[[ML/00 ML Index|监督学习]]中的**回归**算法：用特征的加权和预测连续值。它非常适合建立机器学习的第一条完整知识链。
+线性回归是[[MachineLearning/ML Index|监督学习]]中的**回归**算法：用特征的加权和预测连续值。它非常适合建立机器学习的第一条完整知识链。
 
 ```mermaid
 flowchart TD

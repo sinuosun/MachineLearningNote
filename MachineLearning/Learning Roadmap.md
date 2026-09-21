@@ -4,7 +4,7 @@ tags: [MOC, roadmap, machine-learning]
 
 # 学习路线：从监督到无监督
 
-这是一条贴近吴恩达常见教学脉络、便于亲手复现的路线，不声称逐课复刻某一版课程目录。
+这是一条根据现有代码和实验逐步整理的路线，不预设固定课程目录；后续主题以实际复现和问题记录为准。
 
 ```mermaid
 flowchart LR
@@ -25,9 +25,9 @@ flowchart LR
 
 ## 当前阶段
 
-1. [[ML/Linear Regression/Linear Regression MOC|Linear Regression]]：已完成回归的模型—损失—优化闭环。
-2. [[ML/Logistic Regression/Logistic Regression MOC|Logistic Regression]]：已完成概率分类、BCE、正则化、阈值与基础诊断。
-3. [[ML/Neural Network/Neural Network MOC|神经网络入门实验]]：已有两个特征的二分类数据、训练/测试集与 Keras 配套代码；反向传播的完整推导仍是下一步。
+1. [[MachineLearning/Linear Regression/Linear Regression MOC|Linear Regression]]：已完成回归的模型—损失—优化闭环。
+2. [[MachineLearning/Logistic Regression/Logistic Regression MOC|Logistic Regression]]：已完成概率分类、BCE、正则化、阈值与基础诊断。
+3. [[MachineLearning/Neural Network/Neural Network MOC|神经网络入门实验]]：已有两个特征的二分类数据、训练/测试集与 Keras 配套代码；反向传播的完整推导仍是下一步。
 4. 随后系统整理模型评估、偏差/方差与学习曲线，再进入树模型和无监督学习。
 
 > [!tip] 每个主题的复现模板
