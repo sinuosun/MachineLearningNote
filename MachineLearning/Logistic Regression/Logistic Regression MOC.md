@@ -13,7 +13,7 @@ flowchart TD
     SPLIT --> SCALE[只用训练集统计量标准化]
     SCALE --> MAP[可选：多项式特征映射 φ/X]
     MAP --> Z[logit: z = φ/X w + b]
-    Z --> SIG[Sigmoid: p = P/y=1|x]
+    Z --> SIG["Sigmoid: p = P/y=1|x"]
     SIG --> BCE[二元交叉熵]
     BCE --> GRAD[梯度: Xᵀ/p-y]
     GRAD --> L2[L2 正则化]
