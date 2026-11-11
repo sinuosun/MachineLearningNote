@@ -47,7 +47,7 @@ python "MachineLearning/Neural Network/Code/neural_network.py"
 python -c "import sys; print(sys.executable)"
 ```
 
-输出应指向 `MachineLearning` conda 环境里的 Python。神经网络目录中的 `NeuralNetwork_original.py` 和 `SoftMax.py` 保留了历史实验与草稿，上面的运行命令使用整理版。
+输出应指向 `MachineLearning` conda 环境里的 Python。神经网络目录中的 `NeuralNetwork_original.py` 保留了原始实验，上面的运行命令使用整理版。
 
 可查看[神经网络 Notebook 源文件](MachineLearning/Neural%20Network/Code/neural_network_colab.ipynb)或[在 Google Colab 打开 main 版](https://colab.research.google.com/github/sinuosun/MachineLearningNote/blob/main/MachineLearning/Neural%20Network/Code/neural_network_colab.ipynb)。在 Colab 中按顺序运行三个代码单元格，由云端环境克隆仓库、补齐所需依赖，再运行 Keras 实验。
 
