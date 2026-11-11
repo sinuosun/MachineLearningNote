@@ -15,8 +15,9 @@ tags: [MOC, machine-learning]
 
 ## 当前进度
 
-- [x] [[MachineLearning/Linear Regression/Linear Regression MOC|线性回归]]：MSE、梯度、正规方程、NumPy/sklearn、三特征可视化
-- [x] [[MachineLearning/Logistic Regression/Logistic Regression MOC|逻辑回归与分类]]：Sigmoid、BCE、多项式特征、L2、阈值与测试集诊断
-- [ ] [[MachineLearning/Neural Network/Neural Network MOC|神经网络入门]]：已有训练/测试集和可运行实验，继续补反向传播
-- [ ] 模型评估、偏差与方差
-- [ ] 决策树与集成学习
+- [[MachineLearning/Linear Regression/Linear Regression MOC|线性回归]]：已学过，已整理 MSE、梯度、正规方程、NumPy/sklearn 和三特征可视化。
+- [[MachineLearning/Logistic Regression/Logistic Regression MOC|逻辑回归与分类]]：已学过，已整理 Sigmoid、BCE、多项式特征、L2、阈值与测试集诊断。
+- [[MachineLearning/Neural Network/Neural Network MOC|神经网络入门（MLP）]]：已学过，仓库已有入门笔记、数据和 Keras 实验。待复习前向传播和反向传播。
+- 决策树、随机森林：已学过，笔记尚未整理到仓库。
+- CNN：下一阶段计划，尚未正式完成。Transformer：未来学习方向。
+- 模型评估、偏差与方差：待系统整理。

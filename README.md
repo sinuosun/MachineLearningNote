@@ -11,13 +11,15 @@
 - [逻辑回归主题](MachineLearning/Logistic%20Regression/Logistic%20Regression%20MOC.md)
 - [神经网络入门](MachineLearning/Neural%20Network/Neural%20Network%20MOC.md)
 
-## 当前完成内容
+## 学习进度与仓库内容
 
-- **线性回归**：多特征模型、MSE、$X^T$、梯度下降、正规方程、NumPy/sklearn 和三特征条件切片。
-- **逻辑回归**：Sigmoid、log-odds、BCE 推导、多项式特征、L2、数据泄漏防护、阈值、混淆矩阵与概率诊断。
-- **神经网络入门**：用户的二维二分类训练/测试数据、Keras 实验及泛化评估。完整反向传播推导待后续复现。
+- **线性回归**：已学过，仓库已整理多特征模型、MSE、$X^T$、梯度下降、正规方程、NumPy/sklearn 和三特征条件切片。
+- **逻辑回归**：已学过，仓库已整理 Sigmoid、log-odds、BCE 推导、多项式特征、L2、数据泄漏防护、阈值、混淆矩阵与概率诊断。
+- **神经网络 / MLP**：已学过，仓库已有入门笔记、二维二分类数据和 Keras 实验。前向传播、反向传播待复习。
+- **决策树与随机森林**：已学过，笔记尚未整理到仓库。
+- **CNN**：计划下一阶段开始，尚未正式完成。**Transformer** 是未来学习方向。
 
-使用 Obsidian 打开仓库根目录即可浏览双链与关系图谱。配套 Python 文件可以独立运行并重新生成笔记中的图片。
+使用 Obsidian 将仓库根目录作为 Vault 打开，从 `00 Home.md` 进入。若脚本、数据或 Notebook 未显示，在「文件与链接」中启用「显示所有文件类型」。线性回归和逻辑回归的配套脚本会重新生成各自 `Assets/` 下的图片。
 
 ## 本机 Python 与 Colab
 
@@ -27,19 +29,16 @@
 conda create --name MachineLearning python=3.11
 conda activate MachineLearning
 python -m pip install -r requirements.txt
-python "MachineLearning/Neural Network/Code/neural_network.py"
 ```
 
-在 VS Code 中选择 `MachineLearning` conda 环境作为 Python 解释器，并确保安装依赖和运行脚本时都处于该环境。conda 环境由 Anaconda 管理，不需要在仓库中创建 `.venv`；依赖清单、源代码、数据和图片会提交。
+如果环境已经创建过，打开终端后运行 `conda activate MachineLearning`。在 VS Code 用 `Python: Select Interpreter` 选择该环境。运行本地 Notebook 时，也在内核菜单选择同一环境。
 
-如果环境已经创建过，后续只需运行 `conda activate MachineLearning`。VS Code 使用 `Python: Select Interpreter` 选择 `MachineLearning` conda 环境；终端、运行按钮和 Notebook 应使用同一个环境。
-
-运行 ML 目录下的脚本时，先激活环境，再从仓库根目录执行：
+运行配套脚本时，先激活环境，再从仓库根目录执行所需的命令：
 
 ```bash
-conda activate MachineLearning
-python "MachineLearning/Neural Network/Code/neural_network.py"
+python "MachineLearning/Linear Regression/Code/linear_regression_numpy.py"
 python "MachineLearning/Logistic Regression/Code/logistic_regression.py"
+python "MachineLearning/Neural Network/Code/neural_network.py"
 ```
 
 验证当前命令使用的解释器：
@@ -48,6 +47,8 @@ python "MachineLearning/Logistic Regression/Code/logistic_regression.py"
 python -c "import sys; print(sys.executable)"
 ```
 
-输出应指向 Anaconda 的 `envs/MachineLearning` 目录。Google Colab 不读取本机 conda 环境，可在 Colab 打开[神经网络 Colab 笔记本](MachineLearning/Neural%20Network/Code/neural_network_colab.ipynb)；它会从公开 GitHub 仓库拉取代码与数据，再在云端运行。
+输出应指向 `MachineLearning` conda 环境里的 Python。神经网络目录中的 `NeuralNetwork_original.py` 和 `SoftMax.py` 保留了历史实验与草稿，上面的运行命令使用整理版。
 
-Python 缓存和 VS Code 临时工作区不纳入仓库。使用 VS Code 时只打开此仓库根目录，不再同时打开旧的副本。
+可查看[神经网络 Notebook 源文件](MachineLearning/Neural%20Network/Code/neural_network_colab.ipynb)或[在 Google Colab 打开 main 版](https://colab.research.google.com/github/sinuosun/MachineLearningNote/blob/main/MachineLearning/Neural%20Network/Code/neural_network_colab.ipynb)。在 Colab 中按顺序运行三个代码单元格，由云端环境克隆仓库、补齐所需依赖，再运行 Keras 实验。
+
+Git 会忽略 Python 缓存、本地虚拟环境和 Obsidian 工作区状态。
