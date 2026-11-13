@@ -10,6 +10,7 @@
 - [线性回归主题](MachineLearning/Linear%20Regression/Linear%20Regression%20MOC.md)
 - [逻辑回归主题](MachineLearning/Logistic%20Regression/Logistic%20Regression%20MOC.md)
 - [神经网络入门](MachineLearning/Neural%20Network/Neural%20Network%20MOC.md)
+- [CNN 学习目录](MachineLearning/CNN/CNN%20MOC.md)
 
 ## 学习进度与仓库内容
 
@@ -17,7 +18,7 @@
 - **逻辑回归**：已学过，仓库已整理 Sigmoid、log-odds、BCE 推导、多项式特征、L2、数据泄漏防护、阈值、混淆矩阵与概率诊断。
 - **神经网络 / MLP**：已学过，仓库已有入门笔记、二维二分类数据和 Keras 实验。前向传播、反向传播待复习。
 - **决策树与随机森林**：已学过，笔记尚未整理到仓库。
-- **CNN**：计划下一阶段开始，尚未正式完成。**Transformer** 是未来学习方向。
+- **CNN**：已收录第 00 讲「神经网络基础」。**Transformer** 是未来学习方向。
 
 使用 Obsidian 将仓库根目录作为 Vault 打开，从 `00 Home.md` 进入。若脚本、数据或 Notebook 未显示，在「文件与链接」中启用「显示所有文件类型」。线性回归和逻辑回归的配套脚本会重新生成各自 `Assets/` 下的图片。
 

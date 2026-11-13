@@ -29,7 +29,7 @@ flowchart LR
 2. [[MachineLearning/Logistic Regression/Logistic Regression MOC|Logistic Regression]]：已学过，仓库已整理概率分类、BCE、正则化、阈值与基础诊断。
 3. [[MachineLearning/Neural Network/Neural Network MOC|Neural Network / MLP]]：已学过，仓库已有入门笔记、二分类数据和 Keras 实验。待复习前向传播和反向传播。
 4. Decision Tree 与 Random Forest：已学过，笔记尚未整理到仓库。模型评估、偏差/方差与学习曲线也待系统整理。
-5. CNN 是下一阶段的学习主题，尚未正式完成。Transformer 是未来方向。
+5. [[MachineLearning/CNN/CNN MOC|CNN]] 从第 00 讲「神经网络基础」开始。Transformer 是未来方向。
 
 > [!tip] 每个主题的复现模板
 > 问题类型 → 数据划分 → 假设函数 → 目标函数 → 优化方法 → 向量化 → 基线库实现 → 泛化诊断。
